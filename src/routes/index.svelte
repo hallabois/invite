@@ -25,9 +25,8 @@
     let verified_all = false;
     let verified_index = 0;
     let verified_text = "";
-    let current_target = "";
     $: verified_all = verified_index == verify_lines.length;
-    $: if(verified_text == atob(verify_lines[verified_index])){
+    $: if(verified_text.toLowerCase() == atob(verify_lines[verified_index]).toLowerCase()){
         verified_index++;
         verified_text = "";
     };
@@ -48,12 +47,20 @@
         <img src="{base}/favicon.png" alt="Hallabois logo">
         <h1>Join the Hallabois discord</h1>
         {#if !verified_all && !skip_verify}
-            <p>Please type the following to continue.</p>
+            <p class="instruction">Please type the following to continue.</p>
             <div class="guide-container">
                 {#each verify_lines as line, index}
-                    {#if verified_index == index}
-                        <p class="guide" in:fade="{{duration: 750, delay: 750 }}" out:fade={{duration: 750}}>{atob(line)}</p>
-                    {/if}
+                    <p class="guide"
+                        in:fade="{{duration: 750, delay: index * 200 }}" 
+                        out:fade={{duration: 750}} 
+                        style="--offset-y: {(index-verified_index)*-3}em;--color: {verified_index == index ? "#2acee1" : "#89b4b9"};" 
+                        on:select={ ()=>{return false} } 
+                        on:paste={ ()=>{return false} } 
+                        on:copy={ ()=>{return false} } 
+                        autocomplete=off
+                    >
+                        {atob(line)}
+                    </p>
                 {/each}
             </div>
             <input type="text" id="verify" placeholder="Type it here. {verified_index + 1} out of {verify_lines.length}" bind:value={verified_text} autofocus />
@@ -169,14 +176,31 @@
         border-radius: 3px;
         width: 90%;
     }
+    .instruction{
+        font-weight: 600;
+    }
     .guide{
-        color: #2acee1;
+        --offset-y: 0;
+        --color: #2acee1;
+        color: var(--color);
         position:absolute;
+        transform: translateY(var(--offset-y));
+        bottom: 0;
+        user-select: none;
+        cursor: text;
+        transition: transform .55s ease-in-out, color .55s ease-in-out;
     }
     .guide-container{
-        height: 52px;
+        height: 75px;
         width: 90%;
         margin: 16px;
         position: relative;
+        /* A quick hack */
+        overflow: hidden;
+        padding-top: 250px;
+        margin-top: -250px;
+        --gradient: linear-gradient(to top, transparent 0%, black 5%, black 10%, transparent 40%);
+        -webkit-mask-image: var(--gradient);
+        mask-image: var(--gradient);
     }
 </style>
