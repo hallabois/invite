@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+    import { fade, fly } from 'svelte/transition';
     import { base } from '$app/paths';
     let version = "1.0.0";
     function openInvite(){
@@ -9,6 +11,30 @@
         catch(e){}
         window.location.href = 'https://discord.gg/BMEWWprYbN';
     }
+    
+
+    let skip_verify = true;
+    let loaded = false;
+    onMount(() => {
+        skip_verify = !window.location.href.includes("challenge");
+        loaded = true;
+    });
+
+    let verify_lines = ["SXPkIG1laWTkbiwgam9rYSBvbGV0IGthbnNsaWFzc2Eu","UHloaXRldHR5IG9sa29vbiBzaW51biBuaW1lc2ku","VHVsa29vbiBzaW51biBBQkMtbGFhamVubnVrc2VzaS4=","VGFwYWh0dWtvb24gc2ludW4gdGFodG9zaSw=","bXn2cyBLLWx1b2tpc3NhIG5paW4ga3VpbiBSZWRpc3PkLg==","QW5uYSBtZWlsbGUgdORu5CBw5Gl25G7kIG1laWTkbiBqb2thcORpduRpbmVuIG9wcGltbWUu","SmEgYW5uYSBtZWlsbGUgbWVpZORuIHBvaXNzYW9sb21tZSBhbnRlZWtzaSw=","bmlpbiBrdWluIG1la2luIGFudGVla3NpIGFubmFtbWUgbmlpbGxlLA==","am90a2Egb3ZhdCBtZWl05CB2YXN0YWFuIHJpa2tvbmVldC4=","xGzka+Qgc2FhdGEgbWVpdOQgcHJva3Jhc3Rpbm9pbWlzZWVuLA==","dmFhbiBw5ORzdOQgbWVpZOR0IGt1cnNzaXN0YSBs5HBpLg==","U2lsbOQgc2ludW4gb24gdmFsdGFrdW50YSBqYSB2b2ltYSBqYSBrdW5uaWEgaWFua2Fpa2tpc2VzdGkuIEFhbWVuLg=="]
+    let no = "LWFobw==";
+    let verified_all = false;
+    let verified_index = 0;
+    let verified_text = "";
+    let current_target = "";
+    $: verified_all = verified_index == verify_lines.length;
+    $: if(verified_text == atob(verify_lines[verified_index])){
+        verified_index++;
+        verified_text = "";
+    };
+    $: if(verified_text.includes(atob(no))){
+        verified_text = atob("TGF1cmkgSGFsbGEu");
+        alert("No.");
+    };
 </script>
 
 <svelte:head>
@@ -21,10 +47,22 @@
     <div class="card">
         <img src="{base}/favicon.png" alt="Hallabois logo">
         <h1>Join the Hallabois discord</h1>
-        <!-- <hr style="width: 50%;" /> -->
-        <div class="button-container">
-            <button on:click={openInvite}>Join</button>
-        </div>
+        {#if !verified_all && !skip_verify}
+            <p>Please type the following to continue.</p>
+            <div class="guide-container">
+                {#each verify_lines as line, index}
+                    {#if verified_index == index}
+                        <p class="guide" in:fade="{{duration: 750, delay: 750 }}" out:fade={{duration: 750}}>{atob(line)}</p>
+                    {/if}
+                {/each}
+            </div>
+            <input type="text" id="verify" placeholder="Type it here. {verified_index + 1} out of {verify_lines.length}" bind:value={verified_text} autofocus />
+        {/if}
+        {#if verified_all || skip_verify}
+            <div class="button-container" in:fade>
+                <button id="join-btn" on:click={loaded? openInvite : null}>Join</button>
+            </div>
+        {/if}
     </div>
     <p class="info">Invite v. {version}</p>
     
@@ -123,5 +161,22 @@
         position: absolute;
         right: 0;
         bottom: 0;
+    }
+    #verify{
+        font-size: 15px;
+        border: none;
+        padding: .2em .5em;
+        border-radius: 3px;
+        width: 90%;
+    }
+    .guide{
+        color: #2acee1;
+        position:absolute;
+    }
+    .guide-container{
+        height: 52px;
+        width: 90%;
+        margin: 16px;
+        position: relative;
     }
 </style>
