@@ -21,7 +21,7 @@
     <div class="card">
         <img src="{base}/favicon.png" alt="Hallabois logo">
         <h1>Join the Hallabois discord</h1>
-        <hr style="width: 50%;" />
+        <!-- <hr style="width: 50%;" /> -->
         <div class="button-container">
             <button on:click={openInvite}>Join</button>
         </div>
