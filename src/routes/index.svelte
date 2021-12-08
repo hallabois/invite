@@ -1,2 +1,105 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+    let version = "1.0.0";
+    function openInvite(){
+        window.location.href = 'https://discord.gg/HXZQZ8b';
+    }
+</script>
+
+<main>
+    <div class="card">
+        <img src="favicon.png" alt="Hallabois logo">
+        <h1>Join the Hallabois discord</h1>
+        <hr style="width: 50%;" />
+        <div class="button-container">
+            <button on:click={openInvite}>Join</button>
+        </div>
+    </div>
+    <p class="info">Invite v. {version}</p>
+</main>
+
+<style>
+    :global(html, body){
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    main{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+
+        background-color: #252525;
+        color: #fff;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    @keyframes focus{
+        0% {
+            box-shadow: 0em 0em 0em #00000077;
+            transform: translateY(2em);
+        }
+        100% {
+            box-shadow: 1em 2em .5em #00000033;
+            transform: translateY(0);
+        }
+    }
+    .card{
+        max-width: 90vw;
+        max-height: 80vh;
+        background-color: #333;
+        padding: 1em;
+        border-radius: 2em;
+        /* background: linear-gradient(#ffffff10,#00000010); */
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        box-shadow: 1em 2em .5em #00000033;
+        animation-name: focus;
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+    }
+    h1{
+        margin-bottom: 0px;
+    }
+    img{
+        width: 120px;
+        height: 120px;
+        padding: 1em;
+        background-color: #292929;
+        border: 1px solid #444;
+        border-radius: 25%;
+    }
+    .button-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    button{
+        border: none;
+        padding: .2em 1.5em;
+        border-radius: 3px;
+        background: #5865f2;
+        color: white;
+        margin: 21.44px;
+
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        font-size: 20px;
+    }
+    button:hover{
+        background: #4f60ce;
+        cursor: pointer;
+    }
+    .info{
+        font-size: .8em;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+</style>
