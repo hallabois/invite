@@ -9,7 +9,7 @@
             sa_event("click_join");
         }
         catch(e){}
-        window.location.href = 'https://discord.gg/BMEWWprYbN';
+        window.location.href = atob('aHR0cHM6Ly9kaXNjb3JkLmdnL0JNRVdXcHJZYk4=');
     }
     
 
