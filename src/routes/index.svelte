@@ -49,8 +49,13 @@
         color: #fff;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
+    
     @keyframes focus{
         0% {
+            box-shadow: 0em 0em 0em #00000077;
+            transform: translateY(2em);
+        }
+        20% {
             box-shadow: 0em 0em 0em #00000077;
             transform: translateY(2em);
         }
@@ -76,7 +81,7 @@
         box-shadow: 1em 2em .5em #00000033;
         animation-name: focus;
         animation-duration: 1.5s;
-        animation-timing-function: cubic-bezier(0, 0, 0.48, 1.12);
+        animation-timing-function: cubic-bezier(0,0,.48,1.3);
     }
     h1{
         margin-bottom: 0px;

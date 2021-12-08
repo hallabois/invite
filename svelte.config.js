@@ -10,8 +10,8 @@ const config = {
 
  kit: {
  // hydrate the <div id="svelte"> element in src/app.html
- paths: {
-	base: '/invite'
+  paths: {
+    // base: '/invite'
   },
   target: '#svelte',
   adapter: adapter({
