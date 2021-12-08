@@ -33,7 +33,7 @@
     };
     $: if(verified_text.includes(atob(no))){
         verified_text = atob("TGF1cmkgSGFsbGEu");
-        alert("No.");
+        alert("Ei.");
     };
 </script>
 
