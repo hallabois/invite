@@ -2,9 +2,20 @@
     import { base } from '$app/paths';
     let version = "1.0.0";
     function openInvite(){
+        try{
+            // @ts-ignore
+            sa_event("click_join");
+        }
+        catch(e){}
         window.location.href = 'https://discord.gg/BMEWWprYbN';
     }
 </script>
+
+<svelte:head>
+	<title>Invite</title>
+    <link rel="icon" type="image/png" href="./favicon.png"/>
+    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+</svelte:head>
 
 <main>
     <div class="card">
@@ -18,7 +29,6 @@
     <p class="info">Invite v. {version}</p>
     
     <!-- 100% privacy friendly analytics -->
-    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
     <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
 </main>
 
