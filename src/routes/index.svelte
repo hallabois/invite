@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { base } from '$app/paths';
     let version = "1.0.0";
     function openInvite(){
         window.location.href = 'https://discord.gg/BMEWWprYbN';
@@ -7,7 +8,7 @@
 
 <main>
     <div class="card">
-        <img src="favicon.png" alt="Hallabois logo">
+        <img src="{base}/favicon.png" alt="Hallabois logo">
         <h1>Join the Hallabois discord</h1>
         <hr style="width: 50%;" />
         <div class="button-container">
