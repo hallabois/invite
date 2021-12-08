@@ -1,7 +1,7 @@
 <script lang="ts">
     let version = "1.0.0";
     function openInvite(){
-        window.location.href = 'https://discord.gg/HXZQZ8b';
+        window.location.href = 'https://discord.gg/BMEWWprYbN';
     }
 </script>
 
