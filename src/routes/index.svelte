@@ -80,7 +80,7 @@
 
         box-shadow: 1em 2em .5em #00000033;
         animation-name: focus;
-        animation-duration: 1.5s;
+        animation-duration: 1.2s;
         animation-timing-function: cubic-bezier(0,0,.48,1.3);
     }
     h1{
