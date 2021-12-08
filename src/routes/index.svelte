@@ -106,6 +106,8 @@
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
         font-size: 20px;
+
+        transition: background .25s;
     }
     button:hover{
         background: #4f60ce;
