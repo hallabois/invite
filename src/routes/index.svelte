@@ -16,6 +16,10 @@
         </div>
     </div>
     <p class="info">Invite v. {version}</p>
+    
+    <!-- 100% privacy friendly analytics -->
+    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+    <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
 </main>
 
 <style>
