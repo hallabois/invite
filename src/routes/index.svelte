@@ -75,8 +75,8 @@
 
         box-shadow: 1em 2em .5em #00000033;
         animation-name: focus;
-        animation-duration: 1s;
-        animation-timing-function: ease-out;
+        animation-duration: 1.5s;
+        animation-timing-function: cubic-bezier(0, 0, 0.48, 1.12);
     }
     h1{
         margin-bottom: 0px;
