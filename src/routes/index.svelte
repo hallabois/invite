@@ -37,7 +37,7 @@
 </script>
 
 <svelte:head>
-	<title>Invite</title>
+	<title>You've been invited</title>
     <link rel="icon" type="image/png" href="./favicon.png"/>
     <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 </svelte:head>
