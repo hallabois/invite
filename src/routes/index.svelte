@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { fade, fly } from 'svelte/transition';
     import { base } from '$app/paths';
-    let version = "1.0.0";
+    let version = "1.1.0";
     function openInvite(){
         try{
             // @ts-ignore
@@ -13,14 +13,21 @@
     }
     
 
-    let skip_verify = true;
+    let skip_verify = false;
     let loaded = false;
     onMount(() => {
-        skip_verify = !window.location.href.includes("challenge");
+        console.clear();
+        console.info("© Hallabois 2022");
+        if(skip_verify){
+            skip_verify = !window.location.href.includes("challenge");
+        }
+        if(window.location.href.includes("challenge")){
+            verify_lines = ["SXPkIG1laWTkbiwgam9rYSBvbGV0IGthbnNsaWFzc2Eu","UHloaXRldHR5IG9sa29vbiBzaW51biBuaW1lc2ku","VHVsa29vbiBzaW51biBBQkMtbGFhamVubnVrc2VzaS4=","VGFwYWh0dWtvb24gc2ludW4gdGFodG9zaSw=","bXn2cyBLLWx1b2tpc3NhIG5paW4ga3VpbiBSZWRpc3PkLg==","QW5uYSBtZWlsbGUgdORu5CBw5Gl25G7kIG1laWTkbiBqb2thcORpduRpbmVuIG9wcGltbWUu","SmEgYW5uYSBtZWlsbGUgbWVpZORuIHBvaXNzYW9sb21tZSBhbnRlZWtzaSw=","bmlpbiBrdWluIG1la2luIGFudGVla3NpIGFubmFtbWUgbmlpbGxlLA==","am90a2Egb3ZhdCBtZWl05CB2YXN0YWFuIHJpa2tvbmVldC4=","xGzka+Qgc2FhdGEgbWVpdOQgcHJva3Jhc3Rpbm9pbWlzZWVuLA==","dmFhbiBw5ORzdOQgbWVpZOR0IGt1cnNzaXN0YSBs5HBpLg==","U2lsbOQgc2ludW4gb24gdmFsdGFrdW50YSBqYSB2b2ltYSBqYSBrdW5uaWEgaWFua2Fpa2tpc2VzdGkuIEFhbWVuLg=="];
+        }
         loaded = true;
     });
 
-    let verify_lines = ["SXPkIG1laWTkbiwgam9rYSBvbGV0IGthbnNsaWFzc2Eu","UHloaXRldHR5IG9sa29vbiBzaW51biBuaW1lc2ku","VHVsa29vbiBzaW51biBBQkMtbGFhamVubnVrc2VzaS4=","VGFwYWh0dWtvb24gc2ludW4gdGFodG9zaSw=","bXn2cyBLLWx1b2tpc3NhIG5paW4ga3VpbiBSZWRpc3PkLg==","QW5uYSBtZWlsbGUgdORu5CBw5Gl25G7kIG1laWTkbiBqb2thcORpduRpbmVuIG9wcGltbWUu","SmEgYW5uYSBtZWlsbGUgbWVpZORuIHBvaXNzYW9sb21tZSBhbnRlZWtzaSw=","bmlpbiBrdWluIG1la2luIGFudGVla3NpIGFubmFtbWUgbmlpbGxlLA==","am90a2Egb3ZhdCBtZWl05CB2YXN0YWFuIHJpa2tvbmVldC4=","xGzka+Qgc2FhdGEgbWVpdOQgcHJva3Jhc3Rpbm9pbWlzZWVuLA==","dmFhbiBw5ORzdOQgbWVpZOR0IGt1cnNzaXN0YSBs5HBpLg==","U2lsbOQgc2ludW4gb24gdmFsdGFrdW50YSBqYSB2b2ltYSBqYSBrdW5uaWEgaWFua2Fpa2tpc2VzdGkuIEFhbWVuLg=="]
+    let verify_lines = ["THVlbiBz5ORubvZ0", "amEga+R5dORuIGrkcmtl5G5p"];
     let no = "LWFobw==";
     let verified_all = false;
     let verified_index = 0;
@@ -29,6 +36,11 @@
     $: if(verified_text.toLowerCase() == atob(verify_lines[verified_index]).toLowerCase()){
         verified_index++;
         verified_text = "";
+        try{
+            // @ts-ignore
+            sa_event("step" + verified_index);
+        }
+        catch(e){}
     };
     $: if(verified_text.includes(atob(no))){
         verified_text = atob("TGF1cmkgSGFsbGEu");
@@ -57,13 +69,12 @@
                         on:select={ ()=>{return false} } 
                         on:paste={ ()=>{return false} } 
                         on:copy={ ()=>{return false} } 
-                        autocomplete=off
                     >
                         {atob(line)}
                     </p>
                 {/each}
             </div>
-            <input type="text" id="verify" placeholder="Type it here. {verified_index + 1} out of {verify_lines.length}" bind:value={verified_text} autofocus />
+            <input type="text" id="verify" autocomplete=off on:paste={ ()=>{return false} } placeholder="Type it here. {verified_index + 1} out of {verify_lines.length}" bind:value={verified_text} autofocus />
         {/if}
         {#if verified_all || skip_verify}
             <div class="button-container" in:fade>
@@ -166,7 +177,7 @@
     .info{
         font-size: .8em;
         position: absolute;
-        right: 0;
+        right: 1em;
         bottom: 0;
     }
     #verify{
