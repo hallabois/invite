@@ -27,7 +27,7 @@
         loaded = true;
     });
 
-    let verify_lines = ["THVlbiBz5ORubvZ0", "amEga+R5dORuIGrkcmtl5G5p"];
+    let verify_lines = ["a+R5dORuIGrkcmtl5G5p"];
     let no = "LWFobw==";
     let verified_all = false;
     let verified_index = 0;
