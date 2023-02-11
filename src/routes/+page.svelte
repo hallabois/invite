@@ -61,7 +61,7 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" type="image/png" href="./favicon.png" />
+	<link rel="icon" type="image/png" href="{base}/favicon.png" />
 	<script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 </svelte:head>
 
